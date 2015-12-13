@@ -31,9 +31,11 @@ Vorbedingungen
 Konfiguration
 -------------
 
-$AWSAccessKeyId  = <Amazon WebService Access Key>
-$AWSSecretKey    = <Amazon WebService Secret Key>
-$AssociateTag    = <Amazon WebService AssociateTag>
+$AWSAccessKeyId  = Amazon WebService Access Key
+
+$AWSSecretKey    = Amazon WebService Secret Key
+
+$AssociateTag    = Amazon WebService AssociateTag
 
 (siehe: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html)
 
