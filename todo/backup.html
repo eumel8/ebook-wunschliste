@@ -1,0 +1,32 @@
+<html>
+<head><title>Export/Import localstorage</title>
+<link rel="stylesheet" href="assets/todo.css" />
+<script language="JavaScript">
+function submitform (form)
+{
+    var NewTodo = form.inputbox.value,
+    storage_key = "todoData";
+    localStorage[storage_key] = JSON.parse(NewTodo);
+    alert ("Erfolgreich gespeichert");
+}
+</script>
+</head>
+    <body>
+    <h3>Export/Import <a href="index.html">B&uuml;cherleseliste</a></h3>
+      <form method="get" action="">
+        <textarea name="inputbox" id="inputbox" rows="4" cols="100">...</textarea>
+        <input type="button" name="button" Value="Speichern" onClick="submitform(this.form)">
+ 	<br />
+	Der derzeitige Inhalt von <strong>todoData</strong> auf diesem Rechner.
+      </form>
+    <script>
+        var text = document.getElementById("inputbox"),
+            storage_key = "todoData",
+            json_str;
+        json_str = JSON.stringify(localStorage[storage_key]);
+        text.value = json_str;
+    </script>
+    </body>
+</html>
+
+
