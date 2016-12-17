@@ -50,7 +50,8 @@ Licence URI: http://www.os-templates.com/template-terms
     <div id="search">
       <form action='<?php htmlspecialchars($_SERVER["SCRIPT_NAME"]) ?>' method='get' accept-charset='UTF-8'>
         <fieldset>
-          <legend for="keywords">ebook-search</legend>
+	  <legend for="keywords">ebook-search</legend>
+          <input type="checkbox" name="belletristik" value="belletristik">Suche nur in Belletristik<br />
           <input type="submit" name="go" id="go" value="GO" onclick="history.go(0)">
           <input type="text" name="keywords" value="<?php echo $Keywords ?>"  size="56" autofocus="autofocus" id="keywords">
         </fieldset>
@@ -85,6 +86,8 @@ Licence URI: http://www.os-templates.com/template-terms
     if (isset($_GET['ItemId']))    {$ItemId = filter_var($_GET['ItemId'],FILTER_SANITIZE_STRING);}
     if (isset($_GET['Operation'])) {$Operation = filter_var($_GET['Operation'],FILTER_SANITIZE_STRING);}
     if (isset($_GET['ResponseGroup'])) {$ResponseGroup = filter_var($_GET['ResponseGroup'],FILTER_SANITIZE_STRING);}
+    if (isset($_GET['belletristik']))  {$Browsenode = "287480,186606" ;}
+
 
     if (isset($_COOKIE["Session"])) {
       $session = $_COOKIE["Session"];
@@ -121,7 +124,11 @@ Licence URI: http://www.os-templates.com/template-terms
     if (isset($ItemId)) {
       $request = "AWSAccessKeyId=".$AWSAccessKeyId."&AssociateTag=".$AssociateTag."&IdType=ASIN&ItemId=".$ItemId."&Operation=ItemLookup&ResponseGroup=".rawurlencode($ResponseGroup)."&Service=AWSECommerceService&Timestamp=".$Timestamp."&Version=".$Version;
     } else {
-      $request = "AWSAccessKeyId=".$AWSAccessKeyId."&AssociateTag=".$AssociateTag."&ItemPage=".$ItemPage."&Keywords=".rawurlencode($Keywords)."&Operation=".$Operation."&ResponseGroup=".rawurlencode($ResponseGroup)."&SearchIndex=".$SearchIndex."&Service=AWSECommerceService&Timestamp=".$Timestamp."&Version=".$Version;
+        if (isset($Browsenode)) {
+	  $request = "AWSAccessKeyId=".$AWSAccessKeyId."&AssociateTag=".$AssociateTag."&BrowseNode=".rawurlencode($Browsenode)."&ItemPage=".$ItemPage."&Keywords=".rawurlencode($Keywords)."&Operation=".$Operation."&ResponseGroup=".rawurlencode($ResponseGroup)."&SearchIndex=".$SearchIndex."&Service=AWSECommerceService&Timestamp=".$Timestamp."&Version=".$Version;
+	} else {
+          $request = "AWSAccessKeyId=".$AWSAccessKeyId."&AssociateTag=".$AssociateTag."&ItemPage=".$ItemPage."&Keywords=".rawurlencode($Keywords)."&Operation=".$Operation."&ResponseGroup=".rawurlencode($ResponseGroup)."&SearchIndex=".$SearchIndex."&Service=AWSECommerceService&Timestamp=".$Timestamp."&Version=".$Version;
+        }
     }
 
     $url      .= $request;
