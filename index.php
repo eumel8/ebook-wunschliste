@@ -243,12 +243,21 @@ $Keywords    =  preg_replace("/[ ]/", "+", $Keywords);
 
 if ($TotalPages > 1) {
   if ($ItemPage*1 <= $TotalPages) {
-     echo   "<p class=\"readmore\">";
-     echo   "<a class=\"fl_right\" href=\"".htmlspecialchars("?".
-            "SearchIndex"."=". $SearchIndex ."&".
-            "Keywords"   ."=". $Keywords    ."&".
-            "ItemPage"    ."=".($ItemPage +1)).
-            "\">n&auml;chste Seite</a></p>\n";
+      echo   "<p class=\"readmore\">";
+      if (isset($_GET['belletristik'])) {
+        echo   "<a class=\"fl_right\" href=\"".htmlspecialchars("?".
+               "SearchIndex"."=". $SearchIndex ."&".
+               "Keywords"   ."=". $Keywords    ."&".
+               "belletristik=belletristik&".
+               "ItemPage"    ."=".($ItemPage +1)).
+               "\">n&auml;chste Seite</a></p>\n";
+     } else {
+        echo   "<a class=\"fl_right\" href=\"".htmlspecialchars("?".
+               "SearchIndex"."=". $SearchIndex ."&".
+               "Keywords"   ."=". $Keywords    ."&".
+               "ItemPage"    ."=".($ItemPage +1)).
+               "\">n&auml;chste Seite</a></p>\n";
+     }
   }
 }
 ?>
