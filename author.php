@@ -25,7 +25,13 @@ return;
 function author_get ($session = false) {
 
   $db = new SQLite3('author.db') or die('Unable to open database');
-//  $result = $db->query('SELECT author FROM authors') or die('Query failed');
+  $query = <<<EOD
+CREATE TABLE IF NOT EXISTS authors (
+  author STRING PRIMARY KEY,
+  session STRING )
+EOD;
+  $db->exec($query) or die('Create db failed');
+
   $result = $db->query("SELECT author FROM authors where session='$session'");
   while ($row = $result->fetchArray())
   {
